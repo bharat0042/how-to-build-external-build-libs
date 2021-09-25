@@ -1,0 +1,23 @@
+1. Download the source from official site.
+
+2. We can configure the build settings for windows using either cmake GUI or command prompt:
+	a. Using cmake gui:
+		i. 		Give path to CMakeList.txt in CMake GUI.
+		ii. 	Create a build dir, and set build path to that. This is the location where the Visual Studio Project files will be created.
+		iii.	Then press configure button on bottom, on first attempt it will fail to generate anything and request to set the variables required.
+		iv. 	Set the required variables and run configure and generate. The project files will be generated.
+		v. 		Open the project solution in build dir and build it from visual studio.
+		vi. 	Once the build is done, libs and dlls will be generated, you can use them directly, or install the libs in your C:/Program Files dir.
+		vii. 	To install, build INSTALL.vcxproj with admin rights.
+		
+		
+	b. Using cmd prompt:
+		i. 		Create a build dir and go to that location.
+		ii. 	Run the following command:
+					cmake ../path-to-cmakelist -G "Visual Studio 15 Win64" -DCMAKE_BUILD_TYPE=Release -DBUILD_ONLY="s3;s3-crt;whatever-component"
+		iii. 	Set the generator in above command to whatever you have available(in this case - Visual Studio 15 Win64)
+		iv. 	Run the following command to build:
+					"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" ALL_BUILD.vcxproj  -p:Configuration=Release
+		v. 		Again, set the path to MSBuild in above command according to your installation.
+		vi. 	To install, run the following command with correct access:
+					"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" INSTALL.vcxproj -p:Configuration=Release
